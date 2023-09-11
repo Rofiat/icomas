@@ -12,10 +12,9 @@ const Header = () => {
   return (
     <div className="md:my-2 w-full h-full">
       <nav className="px-[8%] py-3 w-full sticky top-0 bg-white shadow-md">
-      <div className="font-bold text-3xl tracking-wide leading-loose">ICOMAS-
-        <img src={cart1} className="float-right w-7 my-5" alt="cartpic" />
-      </div>
-      
+        <div className="font-bold text-3xl tracking-wide leading-loose">ICOMAS-
+          <img src={cart1} className="float-right w-7 my-5" alt="cartpic" />
+        </div>
       </nav>
       <div className="w-full h-full px-[7%] py-8 md:py-16 mb-10">
         <div className="flex md:flex-row md:place-content-between">
@@ -67,12 +66,62 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <Divider className="h-0.5 bg-gray-400"/>
+        <Divider className="h-0.5 bg-gray-400 mb-10"/>
+        <div className="border border-gray-200 w-full h-[1000px] py-7 pr-3 flex gap-5">
+          <div className="w-[300px] mx-5">
+            <p className="font-bold text-xl my-5">Category</p>
+              <div class="list-group">
+                <label class="list-group-item">
+                  <input type="checkbox" className="form-check-input me-6 brand_filter" value="Men" />men
+                </label>
+              </div>
+              <div>
+                <label class="list-group-item">
+                  <input type="checkbox" class="form-check-input me-6 brand_filter" value="Men" />women
+                </label>
+              </div>
+              <div class="list-group">
+                <label class="list-group-item">
+                  <input type="checkbox" className="form-check-input me-6 brand_filter" value="Men" />boys
+                </label>
+              </div>
+              <div>
+                <label class="list-group-item">
+                  <input type="checkbox" class="form-check-input me-6 brand_filter" value="Men" />girls
+                </label>
+              </div> 
+              <div>
+                <label class="list-group-item">
+                  <input type="checkbox" class="form-check-input me-6 brand_filter" value="Men" />unisex
+                </label>
+              </div>                
+              <p className="font-bold text-xl my-5">Price Range</p>
+              <div class="list-group">
+                <label class="list-group-item">
+                  <input type="checkbox" className="form-check-input me-6 brand_filter" value="Men" />Less than $20
+                </label>
+              </div>
+              <div class="list-group">
+                <label class="list-group-item">
+                  <input type="checkbox" class="form-check-input me-6 brand_filter" value="Men" />$20 - $100
+                </label>
+              </div>
+              <div class="list-group">
+                <label class="list-group-item">
+                  <input type="checkbox" className="form-check-input me-6 brand_filter" value="Men" />$100 - $200
+                </label>
+              </div>
+              <div class="list-group">
+                <label class="list-group-item">
+                  <input type="checkbox" class="form-check-input me-6 brand_filter" value="Men" />Greater than $200
+                </label>
+              </div> 
+          </div>
+          <div className="border border-gray-200 w-full h-full"></div>
       </div> 
       
     </div>
+  </div>
   );
 }
-
 export default Header;
-
