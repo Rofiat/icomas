@@ -1,14 +1,53 @@
 import React from 'react';
 import cart1 from "../../images/cart1.png";
+import { Card } from 'antd';
 // import { Button, Navbar } from 'flowbite-react';
 import rainbowlady from "../../images/rainbowlady.jpg";
-// import ra from "../../images/adorablegirl.jpg";
+import jeanlady from "../../images/jeanlady.jpg";
 import jumptoplady from "../../images/jumptoplady.jpg";
 import coffeelady from "../../images/coffeelady.jpg";
 import { Image, Divider } from 'antd';
 
 
 const Header = () => {
+  const pics = [
+    {
+      img: jeanlady,
+      title: "London City",
+      desc: "city",
+      price: "$20",
+    },
+    {
+      img: jeanlady,
+      title: "London City",
+      desc: "city",
+      price: "$20",
+    },
+    {
+      img: jeanlady,
+      title: "London City",
+      desc: "city",
+      price: "$20",
+    },
+    {
+      img: jeanlady,
+      title: "London City",
+      desc: "city",
+      price: "$20",
+    },
+    {
+      img: jeanlady,
+      title: "London City",
+      desc: "city",
+      price: "$20",
+    },
+    {
+      img: jeanlady,
+      title: "London City",
+      desc: "city",
+      price: "$20",
+    },
+  ];
   return (
     <div className="md:my-2 w-full h-full">
       <nav className="px-[8%] py-3 w-full sticky top-0 bg-white shadow-md">
@@ -117,7 +156,23 @@ const Header = () => {
                 </label>
               </div> 
           </div>
-          <div className="border border-gray-200 w-full h-full"></div>
+          <div className="border border-gray-200 w-full h-full py-9 px-7 grid grid-cols-3 gap-4">
+           {pics.map((pic) => (
+            <Card
+              hoverable
+              style={{
+                width: 230,
+              }}
+              cover={<img alt="example" src={pic.img} className="rounded-none h-[250px]" />}
+              className="rounded-none"
+            >
+              <Card.Meta description={pic.desc} title={pic.title} />
+              <div className="additional py-2">
+              <p className="price">{pic.price}</p>
+              </div>
+            </Card>
+           ))}
+          </div>
       </div> 
       
     </div>
