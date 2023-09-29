@@ -1,4 +1,4 @@
-import React from 'react';
+import {React, useState} from 'react';
 import cart1 from "../../images/cart1.png";
 import { Card } from 'antd';
 // import { Button, Navbar } from 'flowbite-react';
@@ -6,48 +6,85 @@ import rainbowlady from "../../images/rainbowlady.jpg";
 import jeanlady from "../../images/jeanlady.jpg";
 import jumptoplady from "../../images/jumptoplady.jpg";
 import coffeelady from "../../images/coffeelady.jpg";
+import shorttop from "../../images/shorttop.jpg";
+import finebabe from "../../images/finebabe.jpg";
+import hajia from "../../images/hajia.jpg";
+import jacketlady from "../../images/jacketlady.jpg";
+import babewithcap from "../../images/babewithcap.jpg";
 import { Image, Divider } from 'antd';
 
 
 const Header = () => {
   const pics = [
     {
-      img: jeanlady,
-      title: "London City",
-      desc: "city",
+      id: 1,
+      img: shorttop,
+      title: "London",
       price: "$20",
+      desc: "men"
     },
     {
+      id: 2,
       img: jeanlady,
-      title: "London City",
-      desc: "city",
-      price: "$20",
+      title: "Germany",
+      price: "$25",
+      desc: "women"
     },
     {
-      img: jeanlady,
-      title: "London City",
-      desc: "city",
-      price: "$20",
+      id: 3,
+      img: babewithcap,
+      title: "Egypt",
+      price: "$30",
+      desc: "boys"
     },
     {
-      img: jeanlady,
-      title: "London City",
-      desc: "city",
-      price: "$20",
+      id: 4,
+      img: finebabe,
+      title: "Iran",
+      price: "$35",
+      desc: "girls"
     },
     {
-      img: jeanlady,
-      title: "London City",
-      desc: "city",
-      price: "$20",
+      id: 5,
+      img: hajia,
+      title: "Iraq",
+      price: "$40",
+      desc:"unisex"
     },
     {
-      img: jeanlady,
-      title: "London City",
-      desc: "city",
-      price: "$20",
+      id: 6,
+      img: jacketlady,
+      title: "NewYork",
+      price: "$45",
+      desc:"women"
     },
   ];
+
+  const [filterTags, setFilterTags] = useState([])
+  console.log(filterTags);
+
+  const filteredDATA = 
+    pics.filter((sometn) => 
+    filterTags.length > 0
+    ? filterTags.every((filterTag) => 
+      pics.map((pic) => pic.desc).includes(filterTag)
+    )
+     : pics
+    )
+
+    console.log(pics);
+
+  const filterHandler = (event) => {
+
+    if (event.target.checked) {
+      setFilterTags([...filterTags, event.target.value])
+    } else {
+      setFilterTags(
+        filterTags.filter((filterTag) => filterTag !== event.target.value)
+      )
+    }
+  }
+
   return (
     <div className="md:my-2 w-full h-full">
       <nav className="px-[8%] py-3 w-full sticky top-0 bg-white shadow-md">
@@ -106,77 +143,117 @@ const Header = () => {
           </div>
         </div>
         <Divider className="h-0.5 bg-gray-400 mb-10"/>
-        <div className="border border-gray-200 w-full h-[1000px] py-7 pr-3 flex gap-5">
-          <div className="w-[300px] mx-5">
+        <div className="border border-gray-200 w-full mx-auto sm:h-[1000px] py-4 px-1 sm:py-7 sm:pr-3 sm:flex sm:gap-5">
+          <div className="sm:w-[300px] sm:mx-5">
             <p className="font-bold text-xl my-5">Category</p>
-              <div class="list-group">
-                <label class="list-group-item">
-                  <input type="checkbox" className="form-check-input me-6 brand_filter" value="Men" />men
+              <ul>
+              <div>
+                <label className="list-group-item">
+                  <input 
+                  type="checkbox" 
+                  className="form-check-input me-6" 
+                  onChange={filterHandler}
+                  value="men"
+                  id="men" 
+                />
+                  men
                 </label>
               </div>
               <div>
-                <label class="list-group-item">
-                  <input type="checkbox" class="form-check-input me-6 brand_filter" value="Men" />women
+                <label className="list-group-item">
+                  <input 
+                  type="checkbox" 
+                  className="form-check-input me-6" 
+                  onChange={filterHandler}
+                  value="women"
+                  id="women"
+                  />
+                  women
                 </label>
               </div>
-              <div class="list-group">
-                <label class="list-group-item">
-                  <input type="checkbox" className="form-check-input me-6 brand_filter" value="Men" />boys
+              <div className="list-group">
+                <label className="list-group-item">
+                  <input 
+                  type="checkbox" 
+                  className="form-check-input me-6" 
+                  onChange={filterHandler}
+                  value="boys"
+                  id="boys" 
+                  />
+                  boys
                 </label>
               </div>
               <div>
-                <label class="list-group-item">
-                  <input type="checkbox" class="form-check-input me-6 brand_filter" value="Men" />girls
+                <label className="list-group-item">
+                  <input 
+                  type="checkbox" 
+                  className="form-check-input me-6" 
+                  value="girls"
+                  onChange={filterHandler}
+                  id="girls" 
+                  />
+                  girls
                 </label>
               </div> 
               <div>
-                <label class="list-group-item">
-                  <input type="checkbox" class="form-check-input me-6 brand_filter" value="Men" />unisex
-                </label>
-              </div>                
-              <p className="font-bold text-xl my-5">Price Range</p>
-              <div class="list-group">
-                <label class="list-group-item">
-                  <input type="checkbox" className="form-check-input me-6 brand_filter" value="Men" />Less than $20
-                </label>
-              </div>
-              <div class="list-group">
-                <label class="list-group-item">
-                  <input type="checkbox" class="form-check-input me-6 brand_filter" value="Men" />$20 - $100
+                <label className="list-group-item">
+                  <input 
+                  type="checkbox" 
+                  className="form-check-input me-6" 
+                  value="unisex" 
+                  onChange={filterHandler}
+                  id="unisex"
+                  />
+                  unisex
                 </label>
               </div>
-              <div class="list-group">
-                <label class="list-group-item">
-                  <input type="checkbox" className="form-check-input me-6 brand_filter" value="Men" />$100 - $200
+          
+              </ul>
+              
+                             
+          <p className="font-bold text-xl my-5">Price Range</p>
+              <div className="list-group">
+                <label className="list-group-item">
+                  <input type="radio" className="form-check-input me-6 brand_filter" name="price" />Less than $20
                 </label>
               </div>
-              <div class="list-group">
-                <label class="list-group-item">
-                  <input type="checkbox" class="form-check-input me-6 brand_filter" value="Men" />Greater than $200
+              <div className="list-group">
+                <label className="list-group-item">
+                  <input type="radio" className="form-check-input me-6 brand_filter" name="price" />$20 - $100
+                </label>
+              </div>
+              <div className="list-group">
+                <label className="list-group-item">
+                  <input type="radio" className="form-check-input me-6 brand_filter" name="price" />$100 - $200
+                </label>
+              </div>
+              <div className="list-group">
+                <label className="list-group-item">
+                  <input type="radio" className="form-check-input me-6 brand_filter" name="price" />Greater than $200
                 </label>
               </div> 
           </div>
-          <div className="border border-gray-200 w-full h-full py-9 px-7 grid grid-cols-3 gap-4">
-           {pics.map((pic) => (
+          <div className="border border-gray-200 w-full h-full py-5 px-5 md:px-10 sm:py-9 grid grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-4">
+           {filteredDATA?.map((somet) => (
             <Card
+              key={somet.id}
               hoverable
               style={{
                 width: 230,
               }}
-              cover={<img alt="example" src={pic.img} className="rounded-none h-[250px]" />}
+              cover={<Image height={250} alt="example" src={somet.img} className="rounded-none" />}
               className="rounded-none"
             >
-              <Card.Meta description={pic.desc} title={pic.title} />
+              <Card.Meta description={somet.desc} title={somet.title} />
               <div className="additional py-2">
-              <p className="price">{pic.price}</p>
+              <p className="price">{somet.price}</p>
               </div>
             </Card>
            ))}
           </div>
-      </div> 
-      
+        </div>
+      </div>
     </div>
-  </div>
   );
 }
 export default Header;
