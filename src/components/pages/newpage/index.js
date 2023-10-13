@@ -1,11 +1,7 @@
 import { useState } from 'react'
 
-export default function Filter() {
+const Newpage = () => {
   const DATA = [
-    {
-      id: 1,
-      title: 'Enjoy studying English',
-      tags: [
         {
           id: 'tag1',
           title: 'English',
@@ -16,63 +12,53 @@ export default function Filter() {
           title: 'For kids',
           slug: 'kids',
         },
-      ],
-    },
-    {
-      id: 2,
-      title: 'Parlons français',
-      tags: [
+      
         {
           id: 'tag3',
           title: 'French',
           slug: 'french',
         },
-        { id: 'tag2', title: 'Kids', slug: 'kids' },
-      ],
-    },
-    {
-      id: 3,
-      title: 'Intermediate English',
-      tags: [
+        { 
+          id: 'tag4', 
+          title: 'Kids', 
+          slug: 'kids' 
+        },
+     
         {
-          id: 'tag1',
+          id: 'tag5',
           title: 'English',
           slug: 'english',
         },
         {
-          id: 'tag4',
+          id: 'tag6',
           title: 'Adults',
           slug: 'adults',
         },
-      ],
-    },
-    {
-      id: 4,
-      title: 'How to study French',
-      tags: [
+     
         {
-          id: 'tag3',
+          id: 'tag7',
           title: 'French',
           slug: 'french',
         },
         {
-          id: 'tag4',
+          id: 'tag8',
           title: 'Adults',
           slug: 'adults',
         },
-      ],
-    },
-  ]
+      ];
+    
+  
 
   const [filterTags, setFilterTags] = useState([])
 
-  const filteredDATA = DATA.filter((node) =>
+  const filteredDATA = DATA.filter((ans) =>
     filterTags.length > 0
-      ? filterTags.every((filterTag) =>
-          node.tags.map((tag) => tag.slug).includes(filterTag)
-        )
+      ? filterTags.map((tag) => tag.slug).includes(filterTags)
       : DATA
   )
+// console.log(filteredDATA);
+
+console.log(filterTags);
 
   const filterHandler = (event) => {
     if (event.target.checked) {
@@ -85,7 +71,7 @@ export default function Filter() {
   }
 
   return (
-    <div className="mb-10">
+    <div>
       <div>
         <label htmlFor="english">
           <input
@@ -126,9 +112,10 @@ export default function Filter() {
       </div>
       <ul>
         {filteredDATA.map((node) => (
-          <li key={node.id}></li>
+          <li key={node.id}>{node.title}</li>
         ))}
       </ul>
-    </div>
-  )
-}
+      </div>
+      );
+    }
+    export default Newpage;

@@ -61,18 +61,22 @@ const Header = () => {
   ];
 
   const [filterTags, setFilterTags] = useState([])
-  console.log(filterTags);
 
-  const filteredDATA = 
-    pics.filter((sometn) => 
-    filterTags.length > 0
-    ? filterTags.every((filterTag) => 
-      pics.map((pic) => pic.desc).includes(filterTag)
-    )
-     : pics
-    )
+  // const filteredDATA = 
+    // pics.map((item) => 
+    // filterTags.length > 0
+    // ? filterTags.every((filterTag) => 
+      // item.filter(pic => pic.desc).includes(filterTag)
+      // console.log(item)
+    // )
+     // : pics
+    // )
+    // console.log(pics.desc);
+    // console.log(filteredDATA);
 
-    console.log(pics);
+    const filteredDATA = pics.filter(pic => pic.desc === "unisex");
+      
+                                                              
 
   const filterHandler = (event) => {
 
@@ -84,6 +88,7 @@ const Header = () => {
       )
     }
   }
+ 
 
   return (
     <div className="md:my-2 w-full h-full">
@@ -209,7 +214,9 @@ const Header = () => {
               </div>
           
               </ul>
-              
+             
+
+
                              
           <p className="font-bold text-xl my-5">Price Range</p>
               <div className="list-group">
