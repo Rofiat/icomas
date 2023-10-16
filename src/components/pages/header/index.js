@@ -60,21 +60,21 @@ const Header = () => {
     },
   ];
 
+
+  console.log(pics[3].desc);
+
   const [filterTags, setFilterTags] = useState([])
 
-  // const filteredDATA = 
-    // pics.map((item) => 
-    // filterTags.length > 0
-    // ? filterTags.every((filterTag) => 
-      // item.filter(pic => pic.desc).includes(filterTag)
-      // console.log(item)
-    // )
-     // : pics
-    // )
-    // console.log(pics.desc);
-    // console.log(filteredDATA);
+  const filteredDATA = 
+    pics.filter((item) => 
+    filterTags.length > 0
+    ? filterTags.every((filterTag) =>
+      item.desc===(filterTag)
+     )
+     : pics
+     )
 
-    const filteredDATA = pics.filter(pic => pic.desc === "unisex");
+    console.log(filteredDATA);
       
                                                               
 
@@ -88,7 +88,7 @@ const Header = () => {
       )
     }
   }
- 
+ // console.log(filterHandler);
 
   return (
     <div className="md:my-2 w-full h-full">
