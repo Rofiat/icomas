@@ -60,35 +60,20 @@ const Header = () => {
     },
   ];
 
+  const [filteredUsers, setFilteredUsers] = useState([]);
 
-  console.log(pics[3].desc);
-
-  const [filterTags, setFilterTags] = useState([])
-
-  const filteredDATA = 
-    pics.filter((item) => 
-    filterTags.length > 0
-    ? filterTags.every((filterTag) =>
-      item.desc===(filterTag)
-     )
-     : pics
-     )
-
-    console.log(filteredDATA);
-      
-                                                              
-
-  const filterHandler = (event) => {
-
+  const handleFilter = (event) => {
     if (event.target.checked) {
-      setFilterTags([...filterTags, event.target.value])
-    } else {
-      setFilterTags(
-        filterTags.filter((filterTag) => filterTag !== event.target.value)
-      )
+      setFilteredUsers([...filteredUsers, event.target.value])
     }
-  }
- // console.log(filterHandler);
+    else{
+      setFilteredUsers(
+        filteredUsers.filter((filteredUser) => filteredUser !== event.target.value)
+    )  
+    }
+  };
+
+ console.log(pics);
 
   return (
     <div className="md:my-2 w-full h-full">
@@ -118,7 +103,7 @@ const Header = () => {
           sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia 
           consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. 
           </p>
-          <div className=''>
+          <div className='z-[-1]'>
             <div className="font-bold text-md tracking-wide md:hidden py-2">People also buy</div>
             <div className="flex gap-5 sm:float-right sm:gap-2">
               <Image
@@ -157,7 +142,7 @@ const Header = () => {
                   <input 
                   type="checkbox" 
                   className="form-check-input me-6" 
-                  onChange={filterHandler}
+                  onChange={handleFilter}
                   value="men"
                   id="men" 
                 />
@@ -169,7 +154,7 @@ const Header = () => {
                   <input 
                   type="checkbox" 
                   className="form-check-input me-6" 
-                  onChange={filterHandler}
+                  onChange={handleFilter}
                   value="women"
                   id="women"
                   />
@@ -181,7 +166,7 @@ const Header = () => {
                   <input 
                   type="checkbox" 
                   className="form-check-input me-6" 
-                  onChange={filterHandler}
+                  onChange={handleFilter}
                   value="boys"
                   id="boys" 
                   />
@@ -194,7 +179,7 @@ const Header = () => {
                   type="checkbox" 
                   className="form-check-input me-6" 
                   value="girls"
-                  onChange={filterHandler}
+                  onChange={handleFilter}
                   id="girls" 
                   />
                   girls
@@ -206,7 +191,7 @@ const Header = () => {
                   type="checkbox" 
                   className="form-check-input me-6" 
                   value="unisex" 
-                  onChange={filterHandler}
+                  onChange={handleFilter}
                   id="unisex"
                   />
                   unisex
@@ -214,11 +199,7 @@ const Header = () => {
               </div>
           
               </ul>
-             
-
-
-                             
-          <p className="font-bold text-xl my-5">Price Range</p>
+             <p className="font-bold text-xl my-5">Price Range</p>
               <div className="list-group">
                 <label className="list-group-item">
                   <input type="radio" className="form-check-input me-6 brand_filter" name="price" />Less than $20
@@ -241,22 +222,44 @@ const Header = () => {
               </div> 
           </div>
           <div className="border border-gray-200 w-full h-full py-5 px-5 md:px-10 sm:py-9 grid grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-4">
-           {filteredDATA?.map((somet) => (
-            <Card
-              key={somet.id}
-              hoverable
-              style={{
-                width: 230,
-              }}
-              cover={<Image height={250} alt="example" src={somet.img} className="rounded-none" />}
-              className="rounded-none"
-            >
-              <Card.Meta description={somet.desc} title={somet.title} />
-              <div className="additional py-2">
-              <p className="price">{somet.price}</p>
-              </div>
-            </Card>
-           ))}
+          {filteredUsers?.length === 0 ? (
+            pics?.map((somt) =>(  
+              <Card
+                key={somt.id}
+                hoverable
+                style={{
+                  width: 230,
+                }}
+                cover={<Image height={250} alt="example" src={somt.img} className="rounded-none" />}
+                className="rounded-none z-[-1]"
+              >
+                <Card.Meta description={somt.desc} title={somt.title} />
+                <div className="additional py-2">
+                <p className="price">{somt.price}</p>
+                </div>
+              </Card>
+            ))) : (
+              filteredUsers?.map((filteredUser) => (
+                pics?.map((somet) =>(
+                  (filteredUser === somet.desc) && (
+                    <Card
+                      key={somet.id}
+                      hoverable
+                      style={{
+                        width: 230,
+                      }}
+                      cover={<Image height={250} alt="example" src={somet.img} className="rounded-none" />}
+                      className="rounded-none z-[-1]"
+                    >
+                      <Card.Meta description={somet.desc} title={somet.title} />
+                      <div className="additional py-2">
+                      <p className="price">{somet.price}</p>
+                      </div>
+                    </Card>
+                  ) 
+                ))))
+            )
+            }
           </div>
         </div>
       </div>

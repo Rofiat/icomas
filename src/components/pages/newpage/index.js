@@ -56,9 +56,6 @@ const Newpage = () => {
       ? filterTags.map((tag) => tag.slug).includes(filterTags)
       : DATA
   )
-// console.log(filteredDATA);
-
-console.log(filterTags);
 
   const filterHandler = (event) => {
     if (event.target.checked) {
