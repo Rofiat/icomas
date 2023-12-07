@@ -14,75 +14,92 @@ import babewithcap from "../../images/babewithcap.jpg";
 import { Image, Divider } from 'antd';
 
 
-const Header = () => {
-  const pics = [
+const Testing = () => {
+  const items = [
     {
       id: 1,
       img: shorttop,
       title: "London",
-      price: 10,
+      price: 20,
       desc: "men"
     },
     {
       id: 2,
       img: jeanlady,
       title: "Germany",
-      price: 50,
+      price: 25,
       desc: "women"
     },
     {
       id: 3,
       img: babewithcap,
       title: "Egypt",
-      price: 500,
+      price: 30,
       desc: "boys"
     },
     {
       id: 4,
       img: finebabe,
       title: "Iran",
-      price: 150,
+      price: 35,
       desc: "girls"
     },
     {
       id: 5,
       img: hajia,
       title: "Iraq",
-      price: 200,
+      price: 40,
       desc:"unisex"
     },
     {
       id: 6,
       img: jacketlady,
       title: "NewYork",
-      price: 450,
+      price: 45,
       desc:"women"
     },
   ];
 
-  const [filteredUsers, setFilteredUsers] = useState(pics);
+  const [filteredUsers, setFilteredUsers] = useState([]);
 
-  const [newArray, setNewArray] = useState(0);
-  const [filt, setFilt] = useState([]);
+  const [selectedRange, setSelectedRange] = useState('all'); // Default: Show all items
+
+      // Function to handle radio button change
+      const handleRangeChange = (event) => {
+        setSelectedRange(event.target.value);
+      };
+
+      const filteredItems = items.filter((item) => {
+        if (selectedRange === 'all') {
+          return true; // Show all items
+        } else if (selectedRange === 'under20') {
+          return item.price < 20; // Show items with price < 20
+        } else if (selectedRange === '20to40') {
+          return item.price >= 20 && item.price <= 40; // Show items with price between 20 and 40
+        } else if (selectedRange === 'over40') {
+          return item.price > 40; // Show items with price > 40
+        } else if (selectedRange === 'cheap') {
+          return item.price < 1000; // Show items with price < 1000
+        } else if (selectedRange === 'expensive') {
+          return item.price >= 1000; // Show items with price >= 1000
+        } else {
+          return false;
+        }
+      });
+      console.log(filteredItems);
 
 
   const handleFilter = (event) => {
-    const {value, checked} = event.target
-    const fil = filt.filter(f => !f.includes(value))
-    const newFil = [...fil, checked ? value : ""].filter(d => d)
-    setFilt(newFil)
-    setNewArray(Number(value))
-    const list = pics.filter(p => newFil.length ? newFil.includes(p.desc) : true).filter(d => {
-      if(value==1) return d.price < 20
-      if(value==2) return d.price >= 20 && d.price <= 100
-      if(value==3) return d.price >= 100 && d.price <= 200
-      if(value==4) return d.price > 200
-      return true
-    })
-    setFilteredUsers(list)
+    if (event.target.checked) {
+      setFilteredUsers([...filteredUsers, event.target.value])
+    }
+    else{
+      setFilteredUsers(
+        filteredUsers.filter((filteredUser) => filteredUser !== event.target.value)
+    )  
+    }
   };
 
-  // console.log(newArray);
 
 
   return (
@@ -210,61 +227,82 @@ const Header = () => {
           
               </ul>
              <p className="font-bold text-xl my-5">Price Range</p>
-              <div>
-                <label className="list-group-item">
-                  <input 
-                  type="radio" 
-                  className="form-check-input me-6" 
-                  onChange={handleFilter}
-                  checked={newArray === 1}
-                  value={1}
-                  name="price"
-                />
-                  less than $20
-                </label>
-              </div>
-              <div>
-                <label className="list-group-item">
-                  <input 
-                  type="radio" 
-                  className="form-check-input me-6" 
-                  onChange={handleFilter}
-                  checked={newArray === 2}
-                  value={2}
-                  name="price"
-                />
-                  $20 - $100
-                </label>
-              </div>
-              <div>
-                <label className="list-group-item">
-                  <input 
-                  type="radio" 
-                  className="form-check-input me-6" 
-                  onChange={handleFilter}
-                  checked={newArray === 3}
-                  value={3}
-                  name="price"
-                />
-                  $100 - $200
-                </label>
-              </div>
-              <div>
-                <label className="list-group-item">
-                  <input 
-                  type="radio" 
-                  className="form-check-input me-6" 
-                  onChange={handleFilter}
-                  checked={newArray === 4}
-                  value={4}
-                  name="price"
-                />
-                  Greater than $200
-                </label>
-              </div>
+             <div className="radio-button">
+            <label>
+              <input
+                type="radio"
+                value="all"
+                checked={selectedRange === 'all'}
+                onChange={handleRangeChange}
+                className="radio-input"
+              />
+              All Items
+            </label>
           </div>
+             <div className="radio-button">
+             <label>
+               <input
+                 type="radio"
+                 value="under20"
+                 checked={selectedRange === 'under20'}
+                 onChange={handleRangeChange}
+                 className="radio-input"
+               />
+               Price Under $20
+             </label>
+           </div>
+           <div className="radio-button">
+             <label>
+               <input
+                 type="radio"
+                 value="20to40"
+                 checked={selectedRange === '20to40'}
+                 onChange={handleRangeChange}
+                 className="radio-input"
+               />
+               Price $20 - $40
+             </label>
+           </div>
+           <div className="radio-button">
+             <label>
+               <input
+                 type="radio"
+                 value="over40"
+                 checked={selectedRange === 'over40'}
+                 onChange={handleRangeChange}
+                 className="radio-input"
+               />
+               Price Over $40
+             </label>
+           </div>
+           <div className="radio-button">
+            <label>
+              <input
+                type="radio"
+                value="cheap"
+                checked={selectedRange === 'cheap'}
+                onChange={handleRangeChange}
+                className="radio-input"
+              />
+              Cheap Items (Under $1000)
+            </label>
+          </div>
+          <div className="radio-button">
+            <label>
+              <input
+                type="radio"
+                value="expensive"
+                checked={selectedRange === 'expensive'}
+                onChange={handleRangeChange}
+                className="radio-input"
+              />
+              Expensive Items ( $1000 and Above)
+            </label>
+          </div>
+        </div>
           <div className="border border-gray-200 w-full h-full py-5 px-5 md:px-10 sm:py-9 grid grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-4">
-          {filteredUsers?.map((somt) =>(  
+          {filteredUsers?.length === 0 ? (
+            items?.map((somt) =>(  
               <Card
                 key={somt.id}
                 hoverable
@@ -279,11 +317,31 @@ const Header = () => {
                 <p className="price">{somt.price}</p>
                 </div>
               </Card>
-            ))}
+            ))) : 
+            filteredUsers?.map((filteredUser) => (
+            items?.map((somet) =>(
+                  (filteredUser === somet.desc) && (
+                    <Card
+                      key={somet.id}
+                      hoverable
+                      style={{
+                        width: 230,
+                      }}
+                      cover={<Image height={250} alt="example" src={somet.img} className="rounded-none" />}
+                      className="rounded-none z-[-1]"
+                    >
+                      <Card.Meta description={somet.desc} title={somet.title} />
+                      <div className="additional py-2">
+                      <p className="price">{somet.price}</p>
+                      </div>
+                    </Card>
+                  ) 
+                ))))
+            }
           </div>
         </div>
       </div>
     </div>
   );
 }
-export default Header;
+export default Testing;
